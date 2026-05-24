@@ -1,5 +1,9 @@
 # pirouter
 
+```bash
+This app is still undergoing development, please note.
+```
+
 `pirouter` is a lightweight LLM routing daemon. It speaks the OpenAI Chat
 Completions API to your agents and routes each request to the cheapest model
 that is likely to handle it well.
