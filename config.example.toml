@@ -1,0 +1,140 @@
+# ---------------------------------------------------------------------------
+# pirouter — example configuration
+#
+# Save as ~/.config/pirouter/config.toml (Linux/macOS)
+# or %APPDATA%\pirouter\config.toml (Windows)
+# ---------------------------------------------------------------------------
+
+[server]
+bind = "127.0.0.1:11435"   # OpenAI-compatible pirouter endpoint
+log_level = "info"
+
+[ledger]
+# Default: platform-appropriate data dir. Override here if desired.
+# path = "/var/lib/pirouter/ledger.db"
+
+# ---------------------------------------------------------------------------
+# Provider credentials
+# ---------------------------------------------------------------------------
+[providers.anthropic]
+api_key_env = "ANTHROPIC_API_KEY"   # read from env at startup
+base_url    = "https://api.anthropic.com"
+# request_timeout_secs = 120
+
+[providers.openai]
+api_key_env = "OPENAI_API_KEY"
+base_url    = "https://api.openai.com"
+# request_timeout_secs = 120
+
+[providers.ollama]
+# Ollama's default local endpoint. pirouter intentionally binds to 11435
+# so it can route to Ollama on 11434 without a port conflict.
+base_url = "http://127.0.0.1:11434"
+# request_timeout_secs = 120
+
+# ---------------------------------------------------------------------------
+# Model aliases
+#   alias  -> { provider, model_id, pricing per 1M tokens }
+# Pricing is used by the ledger to attribute spend.
+# ---------------------------------------------------------------------------
+[models.haiku]
+provider     = "anthropic"
+model_id     = "claude-haiku-4-5-20251001"
+input_per_m  = 0.80
+output_per_m = 4.00
+quality      = "basic"
+context_window = 200000
+supports_tools = true
+
+[models.sonnet]
+provider     = "anthropic"
+model_id     = "claude-sonnet-4-6"
+input_per_m  = 3.00
+output_per_m = 15.00
+quality      = "strong"
+context_window = 200000
+supports_tools = true
+supports_vision = true
+
+[models.opus]
+provider     = "anthropic"
+model_id     = "claude-opus-4-6"
+input_per_m  = 15.00
+output_per_m = 75.00
+quality      = "premium"
+context_window = 200000
+supports_tools = true
+supports_vision = true
+
+[models."gpt-4o-mini"]
+provider     = "openai"
+model_id     = "gpt-4o-mini"
+input_per_m  = 0.15
+output_per_m = 0.60
+quality      = "standard"
+context_window = 128000
+supports_tools = true
+supports_vision = true
+
+[models."gpt-4o"]
+provider     = "openai"
+model_id     = "gpt-4o"
+input_per_m  = 2.50
+output_per_m = 10.00
+quality      = "strong"
+context_window = 128000
+supports_tools = true
+supports_vision = true
+
+[models."llama3.2-local"]
+provider       = "ollama"
+model_id       = "llama3.2:3b"
+quality        = "basic"
+context_window = 8192
+local          = true
+
+[models."qwen2.5-coder-local"]
+provider       = "ollama"
+model_id       = "qwen2.5-coder:7b"
+quality        = "standard"
+context_window = 32768
+supports_tools = true
+local          = true
+
+# ---------------------------------------------------------------------------
+# Built-in routing policy
+#
+# Profiles:
+#   local-first  -> prefer local models when they satisfy the task
+#   balanced     -> cheapest adequate model, then stronger fallbacks
+#   best-quality -> strongest suitable model first
+#   cloud-only   -> ignore local models
+# ---------------------------------------------------------------------------
+[routing]
+profile = "balanced"
+auto_cascade = true
+max_policy_fallbacks = 3
+
+# ---------------------------------------------------------------------------
+# Routing rules (evaluated top-to-bottom; first match wins)
+#
+# Rules are now best used for hard overrides. If no rule matches, the
+# built-in policy router chooses from the capability catalog above.
+# Token predicates use a conservative local estimate; for code/JSON-heavy
+# workloads, leave margin below a model's true context limit.
+# ---------------------------------------------------------------------------
+
+# Explicit client override: header `x-pirouter-route: <alias>`
+[[rules]]
+name = "explicit-override"
+when = { header = { name = "x-pirouter-route", any_value = true } }
+then = { primary = "$header:x-pirouter-route", cascade = [] }
+
+# ---------------------------------------------------------------------------
+# Cascade signals — what counts as "escalate to the next model"
+# ---------------------------------------------------------------------------
+[cascade]
+on_http_error      = true     # 5xx, rate limit, context-length error
+on_short_response  = false    # set min_output_tokens below to enable
+min_output_tokens  = 8
+on_marker          = "<escalate/>"   # opt-in pattern: model emits this to escalate

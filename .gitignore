@@ -1,0 +1,53 @@
+# Rust / build output
+target/
+**/*.rs.bk
+Cargo.lock.bak
+*.pdb
+*.exe
+*.d
+
+# Node / desktop build output
+node_modules/
+**/node_modules/
+dist/
+build/
+
+# pirouter runtime files
+ledger.db
+ledger.db-journal
+ledger.db-wal
+ledger.db-shm
+config.toml
+config.local.toml
+
+# local docs, architecture notes, and planning artifacts
+*.md
+!/README.md
+docs/
+ARCHITECTURE.md
+DESIGN.md
+SPEC.md
+
+# agent memory / guardrails / local assistant config
+AGENTS.md
+CLAUDE.md
+GUARDRAILS.md
+MEMORY.md
+.codex/
+.claude/
+.cursor/
+.continue/
+.opencode/
+.cursorrules
+.windsurfrules
+opencode.json
+opencode.config.json
+memory/
+guardrails/
+
+# editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp

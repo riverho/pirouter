@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Pirouter Design Tokens */
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --surface-muted: #eef1f4;
+    --border: #d9dee5;
+    --text: #111827;
+    --text-muted: #5b6472;
+    --accent: #0f9f8f;
+    --accent-soft: #d9f4ef;
+    --link: #2563eb;
+    --warning: #b7791f;
+    --warning-soft: #fff4d8;
+    --danger: #dc2626;
+    --danger-soft: #ffe4e6;
+    --success: #168a4a;
+    --success-soft: #dcfce7;
+
+    /* shadcn/ui overrides */
+    --background: 220 14% 97%;
+    --foreground: 220 43% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 43% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 43% 11%;
+    --primary: 170 82% 34%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 17% 95%;
+    --secondary-foreground: 220 43% 11%;
+    --muted: 210 17% 95%;
+    --muted-foreground: 216 12% 42%;
+    --accent: 170 82% 34%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 18% 87%;
+    --input: 214 18% 87%;
+    --ring: 170 82% 34%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 30% 4%;
+    --foreground: 0 0% 95%;
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 95%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 170 70% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 170 70% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 170 70% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text);
+    background-color: var(--bg);
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

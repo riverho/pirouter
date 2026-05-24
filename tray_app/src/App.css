@@ -1,0 +1,15 @@
+/* App-specific styles - minimal */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Tabular nums utility */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Smooth transitions */
+.duration-120 {
+  transition-duration: 120ms;
+}

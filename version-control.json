@@ -1,0 +1,28 @@
+{
+  "project": "pirouter",
+  "repository": "https://github.com/riverho/pirouter",
+  "branch": "main",
+  "version": "0.1.0",
+  "tag": "v0.1.0",
+  "status": "release-freeze",
+  "frozen_at": "2026-05-24",
+  "scope": [
+    "OpenAI-compatible chat completions proxy",
+    "Anthropic, OpenAI, and Ollama provider adapters",
+    "TOML routing rules",
+    "Capability-aware policy routing",
+    "Cascade fallback",
+    "SQLite request ledger",
+    "CLI validation, model listing, route dry run, and stats"
+  ],
+  "excluded_from_version_control": [
+    "docs/",
+    "ARCHITECTURE.md",
+    "DESIGN.md",
+    "SPEC.md",
+    "agent memory and guardrail files",
+    "node_modules/",
+    "build artifacts",
+    "local config and ledger files"
+  ]
+}

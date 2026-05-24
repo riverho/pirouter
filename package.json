@@ -1,0 +1,11 @@
+{
+  "name": "pirouter",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "desktop:build:win": "npm --prefix tray_app run desktop:build:win",
+    "desktop:build:win:skip-check": "npm --prefix tray_app run desktop:build:win:skip-check",
+    "desktop:lint": "npm --prefix tray_app run lint",
+    "desktop:clippy": "cargo clippy --manifest-path tray_app/src-tauri/Cargo.toml --all-targets -- -D warnings"
+  }
+}
