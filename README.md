@@ -13,6 +13,8 @@ scripts at one local OpenAI-compatible endpoint. pirouter decides whether the
 work should go to a local Ollama model, a cheaper cloud model, or a stronger
 fallback.
 
+![pirouter in action](https://pub-45635e12296943dd94ce39106dfc2555.r2.dev/1779613716937-668ODd-pirouter.png)
+
 ## Why pirouter
 
 - **One local endpoint for many providers.** OpenAI-compatible clients only
@@ -145,19 +147,19 @@ pirouter stats --hours 24
 ```
 
 The ledger is stored in the platform data directory unless overridden in
-`config.toml`. It is plain SQLite, so you can inspect it with normal SQLite
+config.toml. It is plain SQLite, so you can inspect it with normal SQLite
 tools.
 
 ## Status
 
-`v0.1.0` includes:
+v0.1.0 includes:
 
-- OpenAI-compatible `/v1/chat/completions`
+- OpenAI-compatible /v1/chat/completions
 - Anthropic, OpenAI, and Ollama provider adapters
 - TOML routing rules
 - Capability-aware policy router
 - Cascade fallback
-- SQLite ledger and `pirouter stats`
+- SQLite ledger and pirouter stats
 - CLI config validation, model listing, and route dry runs
 
 Planned next surfaces include true streaming, a tray app, semantic local
@@ -165,4 +167,4 @@ routing, MCP control tools, and optional Pi agent integration.
 
 ## License
 
-Apache-2.0. See [LICENSE](LICENSE).
+Apache-2.0. See LICENSE.
